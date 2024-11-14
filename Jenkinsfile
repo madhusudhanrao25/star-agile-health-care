@@ -35,7 +35,7 @@ pipeline {
         stage('Publish the Image to Dockerhub') {
             steps {
                 echo 'Publish to DockerHub'
-				sh "docker push maddy2964/banking-app:latest"                
+				sh "docker push maddy2964/healthcare:latest"                
             }
         }
         // stage('Copy Playbook to Master') {
