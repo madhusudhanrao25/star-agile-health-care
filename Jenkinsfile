@@ -42,7 +42,7 @@ pipeline {
             steps {
                 echo 'Running Ansible Playbook'
                 sh '''
-                    "ansible-playbook -i /etc/ansible/hosts ansible-playbook.yml"
+                    "/usr/local/bin/ansible-playbook -i /etc/ansible/hosts ansible-playbook.yml"
                 '''
             } 
         }
