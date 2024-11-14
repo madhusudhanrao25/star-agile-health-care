@@ -38,20 +38,12 @@ pipeline {
 				sh "docker push maddy2964/healthcare:latest"                
             }
         }
-        // stage('Copy Playbook to Master') {
-        //     steps {
-        //         echo 'Copying Ansible Playbook to Master Node'
-        //         sh 'scp /home/devopsadmin/workspace/Banking-App/ansible-playbook.yml ansibleadmin@43.204.13.114:/tmp/'
-        //     }
-        // }
-        // stage('Deploy to test-Server') {
-        //     steps {
-        //         echo 'Running Ansible Playbook on Master Node'
-        //         sh '''
-        //             ssh ansibleadmin@43.204.13.114 "/usr/bin/ansible-playbook -i /etc/ansible/hosts /tmp/ansible-playbook.yml"
-        //         '''
-        //     }
-        // } 
+        stage('Deploy to test-Server') {
+            steps {
+                echo 'Running Ansible Playbook'
+                ansiblePlaybook become: true, credentialsId: 'slavenode', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
+            }
+        } 
         // stage('Deploy to Kubernetes Cluster') {
         //     steps {
 		// script {
