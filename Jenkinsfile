@@ -44,13 +44,13 @@ pipeline {
                 ansiblePlaybook become: true, credentialsId: 'ansibleadmin', installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
             } 
         }
-        stage('Verify Kubernetes Connection') {
-            steps {
-                script {
-                    sh 'kubectl get nodes'
-                }
-            }
-        }
+        // stage('Verify Kubernetes Connection') {
+        //     steps {
+        //         script {
+        //             sh 'kubectl get nodes'
+        //         }
+        //     }
+        // }
         // stage('Deploy to Kubernetes Cluster') {
         //     steps {
 		// script {
