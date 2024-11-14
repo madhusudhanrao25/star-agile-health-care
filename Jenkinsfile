@@ -41,7 +41,9 @@ pipeline {
         stage('Deploy to test-Server') {
             steps {
                 echo 'Running Ansible Playbook'
-                ansiblePlaybook become: true, credentialsId: 'ansibleadmin', installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
+                sh '''
+                    ansible-playbook -i /etc/ansible/hosts ansible-playbook.yml -u ansible
+                '''
             } 
         }
         // stage('Deploy to Kubernetes Cluster') {
