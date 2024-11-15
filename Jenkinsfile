@@ -28,9 +28,8 @@ pipeline {
         stage('Login to Dockerhub') {
             steps {
                 echo 'Login to DockerHub'				
-                withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'Qwertyasdfgh@69', usernameVariable: 'maddy2964')]) {
-                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                }                
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                
             }
         }
         stage('Publish the Image to Dockerhub') {
