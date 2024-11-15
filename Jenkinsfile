@@ -15,7 +15,7 @@ pipeline {
         stage('Application Build') {
             steps {
                 echo 'Perform Application Build'
-                sh 'mvn clean package -DtestFailureIgnore=true'
+                sh 'mvn clean package'
             }
         }
         stage('Docker Build') {
@@ -28,8 +28,9 @@ pipeline {
         stage('Login to Dockerhub') {
             steps {
                 echo 'Login to DockerHub'				
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                
+                withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'Qwertyasdfgh@69', usernameVariable: 'maddy2964')]) {
+                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                }                
             }
         }
         stage('Publish the Image to Dockerhub') {
